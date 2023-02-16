@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Guidance Project Test</string>
+
+    <string name="live_data_and_flow_toolbar_title">Teste com Flows</string>
+    <string name="hello_world_default_label">Olá Mundo!</string>
+    <string name="live_data_btn_label">LiveData</string>
+    <string name="flow_btn_label">Flow</string>
+    <string name="state_flow_btn_label">StateFlow</string>
+    <string name="shared_flow_btn_label">SharedFlow</string>
+</resources>

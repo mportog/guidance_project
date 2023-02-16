@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LabelWithButtonCustomView">
+        <attr name="custom_component_description_title" format="string" />
+        <attr name="custom_component_button_label" format="string" />
+    </declare-styleable>
+</resources>
