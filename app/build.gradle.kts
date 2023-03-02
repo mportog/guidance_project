@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
         applicationId = "com.mportog.guidanceprojecttest"
-        minSdk = 21
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = ConfigData.minSdkVersion
+        targetSdk = ConfigData.targetSdkVersion
+        versionCode = ConfigData.versionCode
+        versionName = ConfigData.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,23 +40,24 @@ android {
 }
 
 dependencies {
-    val lifecycle_version = "2.5.1"
-    val coroutines_version = "1.3.9"
-    val koin_version = "3.3.2"
+    // Android
+    implementation(Dependencies.androidx_core)
+    implementation(Dependencies.androidx_appcompat)
+    implementation(Dependencies.android_material)
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    // Test
+    testImplementation(Dependencies.junit)
+
+    // AndroidTest
+    androidTestImplementation(Dependencies.ext_junit)
+    androidTestImplementation(Dependencies.espresso_core)
 
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation(Dependencies.viewmodel_ktx)
     // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation(Dependencies.livedata_ktx)
     // Coroutines e Flow
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
+    implementation(Dependencies.coroutines_android)
     // Koin
-    implementation("io.insert-koin:koin-android:$koin_version")
+    implementation(Dependencies.koin_android)
 }
