@@ -51,12 +51,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
 
-    //ViewModel
+    // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    //LiveData
+    // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    //Coroutines e Flow
+    // Coroutines e Flow
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
-    //Koin
+    // Koin
     implementation("io.insert-koin:koin-android:$koin_version")
 }
