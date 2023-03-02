@@ -1,14 +1,15 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.library)
+    alias(libs.plugins.kotlin)
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    namespace = "guidance_project.widgets"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,8 +33,5 @@ android {
 }
 
 dependencies {
-    // Android
-    implementation(Dependencies.androidx_core)
-    implementation(Dependencies.androidx_appcompat)
-    implementation(Dependencies.android_material)
+    implementation(libs.bundles.android)
 }

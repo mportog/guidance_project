@@ -1,17 +1,19 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.application)
+    alias(libs.plugins.kotlin)
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    namespace = "guidance_project.app"
+
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.mportog.guidanceprojecttest"
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
-        versionCode = ConfigData.versionCode
-        versionName = ConfigData.versionName
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,31 +35,16 @@ android {
         jvmTarget = "1.8"
     }
 
-    // ViewBinding
     buildFeatures {
         viewBinding = true
     }
 }
 
 dependencies {
-    // Android
-    implementation(Dependencies.androidx_core)
-    implementation(Dependencies.androidx_appcompat)
-    implementation(Dependencies.android_material)
-
-    // Test
-    testImplementation(Dependencies.junit)
-
-    // AndroidTest
-    androidTestImplementation(Dependencies.ext_junit)
-    androidTestImplementation(Dependencies.espresso_core)
-
-    // ViewModel
-    implementation(Dependencies.viewmodel_ktx)
-    // LiveData
-    implementation(Dependencies.livedata_ktx)
-    // Coroutines e Flow
-    implementation(Dependencies.coroutines_android)
-    // Koin
-    implementation(Dependencies.koin_android)
+    implementation(libs.bundles.android)
+    implementation(libs.bundles.koin)
+    implementation(libs.bundles.coroutines)
+    implementation(libs.bundles.lifecycle)
+    implementation(libs.bundles.test)
+    implementation(libs.bundles.androidTest)
 }
