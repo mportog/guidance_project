@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Guidance Project Test"
-include ':app'
-include ':widgets'
+include(":app", ":widgets")
