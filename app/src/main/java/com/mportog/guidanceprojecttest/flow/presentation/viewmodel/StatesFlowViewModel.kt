@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mportog.guidanceprojecttest.R
+import guidance_project.app.R
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -12,7 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
-class FlowViewModel : ViewModel() {
+internal class StatesFlowViewModel(
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
 
     private val _livedata = MutableLiveData(R.string.hello_world_default_label)
     val liveData: LiveData<Int> = _livedata
@@ -45,6 +49,5 @@ class FlowViewModel : ViewModel() {
             }
         }
     }
-
 
 }

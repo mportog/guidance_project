@@ -47,4 +47,5 @@ dependencies {
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.test)
     implementation(libs.bundles.androidTest)
+    implementation(libs.bundles.internet)
 }

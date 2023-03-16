@@ -3,18 +3,13 @@ package com.mportog.guidanceprojecttest.flow.presentation.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
-import com.mportog.guidanceprojecttest.databinding.LivedataFlowStateSharedActivityBinding
-import com.mportog.guidanceprojecttest.flow.presentation.viewmodel.FlowViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.mportog.guidanceprojecttest.flow.presentation.viewmodel.DataFlowViewModel
+import guidance_project.app.databinding.LivedataFlowStateSharedActivityBinding
 
 class FlowActivity : AppCompatActivity() {
 
-    private val flowViewModel: FlowViewModel by viewModel()
+    private val dataFlowViewModel: DataFlowViewModel by viewModel()
     private lateinit var binding: LivedataFlowStateSharedActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,13 +24,13 @@ class FlowActivity : AppCompatActivity() {
     }
 
     private fun setupLabelListeners() = with(binding) {
-        mbLivedataButton.setOnClickListener { flowViewModel.onLiveDataButtonClick() }
-        mbStateflowButton.setOnClickListener { flowViewModel.onStateFlowButtonClick() }
-        mbSharedflowButton.setOnClickListener { flowViewModel.onSharedFlowButtonClick() }
+        mbLivedataButton.setOnClickListener { dataFlowViewModel.onLiveDataButtonClick() }
+        mbStateflowButton.setOnClickListener { dataFlowViewModel.onStateFlowButtonClick() }
+        mbSharedflowButton.setOnClickListener { dataFlowViewModel.onSharedFlowButtonClick() }
 
         mbFlowButton.setOnClickListener {
             lifecycleScope.launch {
-                flowViewModel.onFlowButtonClick().collectLatest {
+                dataFlowViewModel.onFlowButtonClick().collectLatest {
                     tvFlowLabel.text = it
                 }
             }
@@ -43,11 +38,11 @@ class FlowActivity : AppCompatActivity() {
     }
 
     private fun setupLabelObservers() {
-        flowViewModel.liveData.observe(this@FlowActivity) {
+        dataFlowViewModel.liveData.observe(this@FlowActivity) {
             binding.tvLivedataLabel.text = resources.getString(it)
         }
         lifecycleScope.launchWhenStarted {
-            flowViewModel.sharedFlow.collectLatest {
+            dataFlowViewModel.sharedFlow.collectLatest {
                 binding.tvSharedflowLabel.text = resources.getString(it)
             }
         }
@@ -55,7 +50,7 @@ class FlowActivity : AppCompatActivity() {
             repeatOnLifecycle(
                 Lifecycle.State.STARTED
             ) {
-                flowViewModel.stateFlow.collectLatest {
+                dataFlowViewModel.stateFlow.collectLatest {
                     binding.tvStateflowLabel.text = resources.getString(it)
                 }
             }
@@ -69,14 +64,14 @@ class FlowActivity : AppCompatActivity() {
     }
 
     private fun setupSnackActionObservers() {
-        flowViewModel.liveData.observe(this@FlowActivity) {
+        dataFlowViewModel.liveData.observe(this@FlowActivity) {
             showSnackbar()
         }
         lifecycleScope.launchWhenStarted {
-            flowViewModel.stateFlow.collectLatest(showSnackbar())
+            dataFlowViewModel.stateFlow.collectLatest(showSnackbar())
         }
         lifecycleScope.launchWhenStarted {
-            flowViewModel.sharedFlow.collectLatest(showSnackbar())
+            dataFlowViewModel.sharedFlow.collectLatest(showSnackbar())
         }
     }
 
